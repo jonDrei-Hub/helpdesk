@@ -1,12 +1,9 @@
+
 <?php
 
-use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
-Route::middleware(['auth'])->group(function () {
-    Route::resource('tickets', TicketController::class);
-});
+use App\Http\Controllers\TicketController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -16,6 +13,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+
+    Route::resource('tickets', TicketController::class);
 });
 
 require __DIR__.'/settings.php';

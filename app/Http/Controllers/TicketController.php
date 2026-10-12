@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Gate;
 
 class TicketController extends Controller
 {
@@ -55,7 +56,7 @@ public function index(Request $request): Response
 
     public function show(Ticket $ticket): Response
     {
-        $this->authorize('view', $ticket);
+        Gate::authorize('view', $ticket);
 
         return Inertia::render('Tickets/Show', [
             'ticket' => $ticket,
@@ -64,7 +65,7 @@ public function index(Request $request): Response
 
     public function edit(Ticket $ticket): Response
     {
-        $this->authorize('update', $ticket);
+        Gate::authorize('update', $ticket);
 
         return Inertia::render('Tickets/Edit', [
             'ticket' => $ticket,
@@ -83,7 +84,7 @@ public function index(Request $request): Response
 
     public function destroy(Ticket $ticket): RedirectResponse
     {
-        $this->authorize('delete', $ticket);
+        Gate::authorize('delete', $ticket);
 
         $ticket->delete();
 
